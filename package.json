@@ -1,9 +1,9 @@
 {
   "name": "groceries",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --aot",
+    "start": "ng serve",
     "build": "ng build --configuration production --aot --base-href '/groceries/'",
     "docker-build": "docker-compose build",
     "docker-start": "docker-compose up",
@@ -26,7 +26,7 @@
     "@angular/material": "^13.1.1",
     "@angular/platform-browser": "^13.1.1",
     "@angular/platform-browser-dynamic": "^13.1.1",
-    "@angular/pwa": "^0.1101.2",
+    "@angular/pwa": "^13.1.2",
     "@angular/router": "^13.1.1",
     "@angular/service-worker": "^13.1.1",
     "rxjs": "~6.5.4",

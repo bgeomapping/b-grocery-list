@@ -18,7 +18,7 @@
       <ng-container *ngIf="recipeIngredients | async as ingredients">
         <mat-list-item *ngFor="let ingredient of ingredients; last as last">
           <mat-icon>keyboard_arrow_right</mat-icon>
-          {{ingredient.measurement}} {{ingredient.name}} - {{ingredient.cost | currency:'USD':'symbol':'1.2-2'}}
+          {{ingredient.measurement}} {{ingredient.name}}
           <mat-divider></mat-divider>
         </mat-list-item>
       </ng-container>

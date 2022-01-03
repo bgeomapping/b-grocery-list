@@ -15,7 +15,7 @@ export class ApiService {
   ) { }
 
   public request<T>(fragment: string, httpOptions = null): Observable<T> {
-      let requestUrl = `${environment.api}/public/food/${fragment}`;
+      let requestUrl = `${environment.api}/v1/food/groceries/${fragment}`;
       let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       return this.http.get<T>(requestUrl, {headers: headers})
         .pipe(
@@ -38,24 +38,24 @@ export class ApiService {
 
 
   public getLatestMealPlan(): Observable<MealPlan> {
-      return this.request<MealPlan>(`meal-plan/latest`, null);
+      return this.request<MealPlan>(`mealPlans/latest`, null);
   }
 
   public getMealPlan(id: number): Observable<MealPlan> {
-      return this.request<MealPlan>(`meal-plan/${id}`, null);
+      return this.request<MealPlan>(`mealPlans/${id}`, null);
   }
   public getMealPlans(): Observable<MealPlan[]> {
-      return this.request<MealPlan[]>(`meal-plan`, null);
+      return this.request<MealPlan[]>(`mealPlans`, null);
   }
   public getMealPlanRecipes(id: number): Observable<MealPlanRecipe[]> {
-      return this.request<MealPlanRecipe[]>(`meal-plan/recipes/${id}`, null);
+      return this.request<MealPlanRecipe[]>(`mealPlans/${id}/recipes`, null);
   }
   public getMealPlanRecipe(id: number): Observable<MealPlanRecipe> {
       return this.request<MealPlanRecipe>(`recipes/${id}`, null);
   }
 
   public getMealPlanGroceries(id: number): Observable<MealPlanGrocery[]> {
-      return this.request<MealPlanGrocery[]>(`meal-plan/groceries/${id}`, null);
+      return this.request<MealPlanGrocery[]>(`${id}`, null);
   }
 
   public getRecipeIngredients(id: number): Observable<RecipeIngredient[]> {
