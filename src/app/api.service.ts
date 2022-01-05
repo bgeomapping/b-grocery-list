@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { map, catchError} from 'rxjs/operators';
-import { RecipeIngredient, MealPlanRecipe, MealPlanGrocery, MealPlan } from '@app/models';
+import { RecipeIngredient, MealPlanRecipe, MealPlanGrocery, MealPlan, RecipeNote } from '@app/models';
 import { environment } from '@env/environment';
 
 @Injectable({
@@ -53,6 +53,10 @@ export class ApiService {
   public getMealPlanRecipe(id: number): Observable<MealPlanRecipe> {
       return this.request<MealPlanRecipe>(`recipes/${id}`, null);
   }
+  public getRecipeNotes(id: number): Observable<RecipeNote[]> {
+      return this.request<RecipeNote[]>(`recipes/${id}/notes`, null);
+  }
+
 
   public getMealPlanGroceries(id: number): Observable<MealPlanGrocery[]> {
       return this.request<MealPlanGrocery[]>(`${id}`, null);

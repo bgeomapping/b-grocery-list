@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { MealPlanGrocery, MealPlan } from '@app/models';
 import { ApiService } from '@app/api.service';
 import { AppService } from '@app/app.service';
+import { StorageService } from '@app/storage.service';
 
 
 @Component({
@@ -12,12 +13,15 @@ import { AppService } from '@app/app.service';
 })
 export class GroceriesComponent implements OnInit {
 
+
   @Input() mealPlan: MealPlan;
   groceriesByCategory: { [key: string]: MealPlanGrocery[] } = {};
+  notesExpanded: boolean = true;
 
   constructor(
     readonly appService: AppService,
-    readonly apiService: ApiService
+    readonly apiService: ApiService,
+    readonly storageService: StorageService
   ) { }
 
   ngOnInit() {
@@ -42,5 +46,12 @@ export class GroceriesComponent implements OnInit {
       });
       return data;
   }
+
+  select($event, grocery) {
+    let data = this.storageService.get(`${this.mealPlan.id}`) || {};
+    grocery.selected =  !grocery.selected;
+    data[grocery.name] = grocery.selected;
+    this.storageService.set(`${this.mealPlan.id}`, data);
+  } 
 
 }

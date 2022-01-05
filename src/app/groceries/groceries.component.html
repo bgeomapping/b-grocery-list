@@ -1,4 +1,21 @@
 <div class="groceries" *ngIf="groceriesByCategory">
+  <ng-container *ngIf="mealPlan?.mealPlanNotes?.length">
+    <mat-expansion-panel class="grocery-list-card" [expanded]="notesExpanded">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span>Notes</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-selection-list dense #selectionList (selectionChange)="notesExpanded = selectionList.selectedOptions.selected.length !== mealPlan.mealPlanNotes.length">
+          <div class="grocery-item" *ngFor="let note of mealPlan.mealPlanNotes">
+            <mat-list-option [disableRipple]="true" [selected]="note.selected">
+              <span [class.grocery-selected]="note.selected" class="row-container">{{note.content}}</span>
+            </mat-list-option>
+          </div> 
+      </mat-selection-list>
+    </mat-expansion-panel>
+  </ng-container>
+
   <ng-container *ngFor="let o of groceriesByCategory | keyvalue">
     <app-grocery-card [mealPlanId]="+mealPlan.id" [category]="o.key.replace('_', ' ')" [groceries]="o.value"></app-grocery-card>
   </ng-container>

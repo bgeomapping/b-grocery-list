@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MealPlan, MealPlanRecipe, RecipeIngredient } from '@app/models';
+import { MealPlan, MealPlanRecipe, RecipeIngredient, RecipeNote } from '@app/models';
 import { ApiService } from '@app/api.service';
 import { AppService } from '@app/app.service';
 import { ActivatedRoute } from '@angular/router';
@@ -15,6 +15,7 @@ export class RecipeComponent implements OnInit {
 
   mealPlan: MealPlan;
   recipe: Observable<MealPlanRecipe>;
+  notes: Observable<RecipeNote[]>;
   recipeIngredients: Observable<RecipeIngredient[]>;
 
   constructor(
@@ -31,6 +32,7 @@ export class RecipeComponent implements OnInit {
         this.appService.setMealPlan(mealPlan);
         this.recipe = this.apiService.getMealPlanRecipe(recipeId);
         this.recipeIngredients = this.apiService.getRecipeIngredients(recipeId);
+        this.notes = this.apiService.getRecipeNotes(recipeId);
         this.mealPlan = mealPlan;
       })
     });

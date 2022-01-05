@@ -1,13 +1,5 @@
 <ng-container *ngIf="recipe | async as result else loading">
     <a class="link link-back" [routerLink]="['/meal-plans', mealPlan.id]"><mat-icon>arrow_back</mat-icon>&nbsp;&nbsp;Back to {{mealPlan.name}}</a>
-    <!-- <div class="recipe-title">
-      <h1><a class="link" *ngIf="result.url" [href]="result.url">{{result.name}}</a><span *ngIf="!result.url">{{result.name}}</span></h1>
-      <div>
-        <em>{{result.cookbook}}</em>
-        <em *ngIf="result.pageNumber > 0">&nbsp;pg. {{result.pageNumber}}</em>
-      </div>
-    </div>
- -->
  <div class="recipe-list">
   <mat-list dense>
       <h1 matSubHeader><a class="link" *ngIf="result.url" [href]="result.url">{{result.name}}</a><span *ngIf="!result.url">{{result.name}}</span></h1>
@@ -15,13 +7,29 @@
         <em>{{result.cookbook}}</em>
         <em *ngIf="result.pageNumber > 0">&nbsp;pg. {{result.pageNumber}}</em>
       </div>
-      <ng-container *ngIf="recipeIngredients | async as ingredients">
+
+
+      <div *ngIf="notes | async as noteList" class="list-section">
+        <ng-container *ngIf="noteList?.length">
+          <span>Notes</span>
+          <mat-list-item *ngFor="let note of noteList; last as last">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+            {{note.content}}
+            <mat-divider></mat-divider>
+          </mat-list-item>
+
+        </ng-container>
+      </div>
+
+      <div *ngIf="recipeIngredients | async as ingredients"  class="list-section">
+        <span>Ingredients</span>
         <mat-list-item *ngFor="let ingredient of ingredients; last as last">
           <mat-icon>keyboard_arrow_right</mat-icon>
           {{ingredient.measurement}} {{ingredient.name}}
           <mat-divider></mat-divider>
         </mat-list-item>
-      </ng-container>
+      </div>
+
   </mat-list>
  </div>
 </ng-container>
