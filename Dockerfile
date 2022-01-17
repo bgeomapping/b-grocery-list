@@ -8,5 +8,5 @@ RUN npx ng build --aot --base-href '/groceries/' --configuration production
 
 FROM nginx:1.19.6 AS deploy-stage
 COPY nginx.conf /etc/nginx/nginx.conf
-WORKDIR /usr/share/nginx/html
+WORKDIR /usr/share/nginx/html/groceries
 COPY --from=build-stage /opt/app/dist/ .
